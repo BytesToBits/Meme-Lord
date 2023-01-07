@@ -421,6 +421,33 @@ class MemeMain(commands.Cog):
         await inter.edit_original_message(file=FILE)
         clear()
 
+    @meme.sub_command(
+        name="how",
+        description="How",
+        options=[
+            disnake.Option(
+                name="what",
+                description="huh",
+                type=disnake.OptionType.string,
+                required=True
+            ),
+            disnake.Option(
+                name="image",
+                description="How???",
+                type=disnake.OptionType.attachment,
+                required=True
+            )
+        ]
+    )
+    async def out_of_context(self, inter:disnake.CommandInteraction, text:str, image:disnake.Attachment):
+        await inter.response.defer(with_message=True)
+
+        image = BytesIO(await image.read())
+
+        FILE, clear = await inter.bot.loop.run_in_executor(None, lambda: how(image, text))
+        await inter.edit_original_message(file=FILE)
+        clear()
+
 
 def setup(bot):
     bot.add_cog(MemeMain(bot))
