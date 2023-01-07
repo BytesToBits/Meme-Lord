@@ -439,12 +439,12 @@ class MemeMain(commands.Cog):
             )
         ]
     )
-    async def out_of_context(self, inter:disnake.CommandInteraction, text:str, image:disnake.Attachment):
+    async def how_cmd(self, inter:disnake.CommandInteraction, what:str, image:disnake.Attachment):
         await inter.response.defer(with_message=True)
 
         image = BytesIO(await image.read())
 
-        FILE, clear = await inter.bot.loop.run_in_executor(None, lambda: how(image, text))
+        FILE, clear = await inter.bot.loop.run_in_executor(None, lambda: how(image, what))
         await inter.edit_original_message(file=FILE)
         clear()
 
