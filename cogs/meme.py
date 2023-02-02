@@ -405,19 +405,25 @@ class MemeMain(commands.Cog):
                 required=True
             ),
             disnake.Option(
-                name="image",
+                name="attachment",
                 description="Just put one",
                 type=disnake.OptionType.attachment,
                 required=True
             )
         ]
     )
-    async def out_of_context(self, inter:disnake.CommandInteraction, text:str, image:disnake.Attachment):
+    async def out_of_context(self, inter:disnake.CommandInteraction, text:str, attachment:disnake.Attachment):
         await inter.response.defer(with_message=True)
 
-        image = BytesIO(await image.read())
+        is_image = "image" in attachment.content_type
 
-        FILE, clear = await inter.bot.loop.run_in_executor(None, lambda: out_of_context(image, text))
+        if is_image:
+            attachment = BytesIO(await attachment.read())
+        else:
+            filename = f"temp/{inter.author.id}-{attachment.filename}"
+            await attachment.save(filename)
+
+        FILE, clear = await inter.bot.loop.run_in_executor(None, lambda: out_of_context(attachment if is_image else filename, text, is_image))
         await inter.edit_original_message(file=FILE)
         clear()
 
@@ -426,25 +432,37 @@ class MemeMain(commands.Cog):
         description="How",
         options=[
             disnake.Option(
-                name="what",
+                name="text",
                 description="huh",
                 type=disnake.OptionType.string,
                 required=True
             ),
             disnake.Option(
-                name="image",
+                name="attachment",
                 description="How???",
                 type=disnake.OptionType.attachment,
                 required=True
             )
         ]
     )
-    async def how_cmd(self, inter:disnake.CommandInteraction, what:str, image:disnake.Attachment):
+    async def how_cmd(self, inter:disnake.CommandInteraction, text:str, attachment:disnake.Attachment):
         await inter.response.defer(with_message=True)
 
-        image = BytesIO(await image.read())
+        if not "image" in attachment.content_type and not "video" in attachment.content_type:
+            return await inter.send("Please upload only videos or images!", ephemeral=True)
 
-        FILE, clear = await inter.bot.loop.run_in_executor(None, lambda: how(image, what))
+        if attachment.size > 5242880:
+            return await inter.send("The maximum attachment size is 5MB! Try again.", ephemeral=True)
+
+        is_image = "image" in attachment.content_type
+
+        if is_image:
+            attachment = BytesIO(await attachment.read())
+        else:
+            filename = f"temp/{inter.author.id}-{attachment.filename}"
+            await attachment.save(filename)
+
+        FILE, clear = await inter.bot.loop.run_in_executor(None, lambda: how(attachment if is_image else filename, text, is_image))
         await inter.edit_original_message(file=FILE)
         clear()
 

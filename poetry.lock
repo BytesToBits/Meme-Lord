@@ -124,7 +124,7 @@ python-versions = ">=3.5"
 
 [[package]]
 name = "imageio"
-version = "2.23.0"
+version = "2.25.0"
 description = "Library for reading and writing a wide range of image, video, scientific, and volumetric data formats."
 category = "main"
 optional = false
@@ -139,10 +139,10 @@ all-plugins = ["astropy", "av", "imageio-ffmpeg", "opencv-python", "psutil", "ti
 all-plugins-pypy = ["av", "imageio-ffmpeg", "psutil", "tifffile"]
 build = ["wheel"]
 dev = ["black", "flake8", "fsspec[github]", "invoke", "pytest", "pytest-cov"]
-docs = ["numpydoc", "pydata-sphinx-theme", "sphinx"]
+docs = ["numpydoc", "pydata-sphinx-theme", "sphinx (<6)"]
 ffmpeg = ["imageio-ffmpeg", "psutil"]
 fits = ["astropy"]
-full = ["astropy", "av", "black", "flake8", "fsspec[github]", "gdal", "imageio-ffmpeg", "invoke", "itk", "numpydoc", "opencv-python", "psutil", "pydata-sphinx-theme", "pytest", "pytest-cov", "sphinx", "tifffile", "wheel"]
+full = ["astropy", "av", "black", "flake8", "fsspec[github]", "gdal", "imageio-ffmpeg", "invoke", "itk", "numpydoc", "opencv-python", "psutil", "pydata-sphinx-theme", "pytest", "pytest-cov", "sphinx (<6)", "tifffile", "wheel"]
 gdal = ["gdal"]
 itk = ["itk"]
 linting = ["black", "flake8"]
@@ -153,7 +153,7 @@ tifffile = ["tifffile"]
 
 [[package]]
 name = "imageio-ffmpeg"
-version = "0.4.7"
+version = "0.4.8"
 description = "FFMPEG wrapper for Python"
 category = "main"
 optional = false
@@ -161,7 +161,7 @@ python-versions = ">=3.5"
 
 [[package]]
 name = "moviepy"
-version = "1.0.3"
+version = "2.0.0.dev2"
 description = "Video editing with Python"
 category = "main"
 optional = false
@@ -169,19 +169,15 @@ python-versions = "*"
 
 [package.dependencies]
 decorator = ">=4.0.2,<5.0"
-imageio = {version = ">=2.5,<3.0", markers = "python_version >= \"3.4\""}
-imageio_ffmpeg = {version = ">=0.2.0", markers = "python_version >= \"3.4\""}
-numpy = [
-    {version = ">=1.17.3", markers = "python_version != \"2.7\""},
-    {version = "*", markers = "python_version >= \"2.7\""},
-]
+imageio = ">=2.5,<3.0"
+imageio_ffmpeg = ">=0.2.0"
+numpy = ">=1.17.3"
 proglog = "<=1.0.0"
 requests = ">=2.8.1,<3.0"
-tqdm = ">=4.11.2,<5.0"
 
 [package.extras]
-doc = ["Sphinx (>=1.5.2,<2.0)", "numpydoc (>=0.6.0,<1.0)", "pygame (>=1.9.3,<2.0)", "sphinx_rtd_theme (>=0.1.10b0,<1.0)"]
-optional = ["matplotlib (>=2.0.0,<3.0)", "opencv-python (>=3.0,<4.0)", "scikit-image (>=0.13.0,<1.0)", "scikit-learn", "scipy (>=0.19.0,<1.5)", "youtube_dl"]
+doc = ["numpydoc (<2.0)", "pygame (>=1.9.3,<2.0)"]
+optional = ["matplotlib (>=2.0.0,<3.0)", "opencv-python (>=3.0,<4.0)", "python-dotenv (>=0.10.0)", "scikit-image (>=0.13.0,<1.0)", "scikit-learn", "scipy (>=0.19.0,<1.5)", "youtube_dl"]
 test = ["coverage (<5.0)", "coveralls (>=1.1,<2.0)", "pytest (>=3.0.0,<4.0)", "pytest-cov (>=2.5.1,<3.0)", "requests (>=2.8.1,<3.0)"]
 
 [[package]]
@@ -282,7 +278,7 @@ multidict = ">=4.0"
 [metadata]
 lock-version = "1.1"
 python-versions = "^3.10"
-content-hash = "4988db14ffdf87e9e6fcc34b668f882e3ace9649884278826a02024315ea9110"
+content-hash = "576504d419f623af8f50d0707c47c8f7a17c88d37fa3cca66be50bc2fe4be64d"
 
 [metadata.files]
 aiohttp = [
@@ -487,19 +483,19 @@ idna = [
     {file = "idna-3.4.tar.gz", hash = "sha256:814f528e8dead7d329833b91c5faa87d60bf71824cd12a7530b5526063d02cb4"},
 ]
 imageio = [
-    {file = "imageio-2.23.0-py3-none-any.whl", hash = "sha256:3f937396c2f341a7d7600a99cd14727cc90002f850fd136cf65fad79c2ff44a0"},
-    {file = "imageio-2.23.0.tar.gz", hash = "sha256:cb635709765e527c94890b4fbb6870e59213fe182a1c8086d167eb3626073cbd"},
+    {file = "imageio-2.25.0-py3-none-any.whl", hash = "sha256:9ef2fdef1235eef849b1aea399f08508493624a2a2c8cc3bba957dabb7d0b79f"},
+    {file = "imageio-2.25.0.tar.gz", hash = "sha256:b80796a1f8c38c697a940a2ad7397ee28900d5c4e51061b9a67d16aca867f33e"},
 ]
 imageio-ffmpeg = [
-    {file = "imageio-ffmpeg-0.4.7.tar.gz", hash = "sha256:7a08838f97f363e37ca41821b864fd3fdc99ab1fe2421040c78eb5f56a9e723e"},
-    {file = "imageio_ffmpeg-0.4.7-py3-none-macosx_10_9_intel.macosx_10_9_x86_64.macosx_10_10_intel.macosx_10_10_x86_64.whl", hash = "sha256:6514f1380daf42815bc8c83aad63f33e0b8b47133421ddafe7b410cd8dfbbea5"},
-    {file = "imageio_ffmpeg-0.4.7-py3-none-manylinux2010_x86_64.whl", hash = "sha256:27b48c32becae1658aa81c3a6b922538e4099edf5fbcbdb4ff5dbc84b8ffd3d3"},
-    {file = "imageio_ffmpeg-0.4.7-py3-none-manylinux2014_aarch64.whl", hash = "sha256:fc60686ef03c2d0f842901b206223c30051a6a120384458761390104470846fd"},
-    {file = "imageio_ffmpeg-0.4.7-py3-none-win32.whl", hash = "sha256:6aba52ddf0a64442ffcb8d30ac6afb668186acec99ecbc7ae5bd171c4f500bbc"},
-    {file = "imageio_ffmpeg-0.4.7-py3-none-win_amd64.whl", hash = "sha256:8e724d12dfe83e2a6eb39619e820243ca96c81c47c2648e66e05f7ee24e14312"},
+    {file = "imageio-ffmpeg-0.4.8.tar.gz", hash = "sha256:fdaa05ad10fe070b7fa8e5f615cb0d28f3b9b791d00af6d2a11e694158d10aa9"},
+    {file = "imageio_ffmpeg-0.4.8-py3-none-macosx_10_9_intel.macosx_10_9_x86_64.macosx_10_10_intel.macosx_10_10_x86_64.whl", hash = "sha256:dba439a303d65061aef17d2ee9324ecfa9c6b4752bd0953b309fdbb79b38451e"},
+    {file = "imageio_ffmpeg-0.4.8-py3-none-manylinux2010_x86_64.whl", hash = "sha256:7caa9ce9fc0d7e2f3160ce8cb70a115e5211e0f048e5c1509163d8f89d1080df"},
+    {file = "imageio_ffmpeg-0.4.8-py3-none-manylinux2014_aarch64.whl", hash = "sha256:dd3ef9835df91570a1cbd9e36dfbc7d228fca42dbb11636e20df75d719de2949"},
+    {file = "imageio_ffmpeg-0.4.8-py3-none-win32.whl", hash = "sha256:0e2688120b3bdb367897450d07c1b1300e96a0bace03ba7de2eb8d738237ea9a"},
+    {file = "imageio_ffmpeg-0.4.8-py3-none-win_amd64.whl", hash = "sha256:120d70e6448617cad6213e47dee3a3310117c230f532dd614ed3059a78acf13a"},
 ]
 moviepy = [
-    {file = "moviepy-1.0.3.tar.gz", hash = "sha256:2884e35d1788077db3ff89e763c5ba7bfddbd7ae9108c9bc809e7ba58fa433f5"},
+    {file = "moviepy-2.0.0.dev2.tar.gz", hash = "sha256:c0567bbaaf17936f498b53f40b8c1e2d7667d4b917f775cac610c4af382d174f"},
 ]
 multidict = [
     {file = "multidict-6.0.2-cp310-cp310-macosx_10_9_universal2.whl", hash = "sha256:0b9e95a740109c6047602f4db4da9949e6c5945cefbad34a1299775ddc9a62e2"},
