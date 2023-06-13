@@ -1,16 +1,17 @@
 [tool.poetry]
-name = "meme lord"
+name = "meme-lord"
 version = "0.1.0"
 description = ""
-authors = ["Nemika-Haj <mmnemijus@gmail.com>"]
+authors = ["Nemika <nemika@bytestobits.dev>"]
 readme = "README.md"
+packages = [{include = "meme_lord"}]
 
 [tool.poetry.dependencies]
-python = "^3.10"
-disnake = "^2.7.0"
-requests = "^2.28.1"
-Pillow = "9.0.0"
-moviepy = "2.0.0.dev2"
+python = "^3.8"
+disnake = "^2.8.1"
+requests = "^2.31.0"
+pillow = "^9.5.0"
+moviepy = "^1.0.3"
 
 
 [build-system]
