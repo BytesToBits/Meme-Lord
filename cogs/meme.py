@@ -466,6 +466,41 @@ class MemeMain(commands.Cog):
         await inter.edit_original_message(file=FILE)
         clear()
 
+    @meme.sub_command(
+        name="wizard-boom",
+        description="Abracaboom.",
+        options=[
+            disnake.Option(
+                name="text",
+                description="bottom text",
+                type=disnake.OptionType.string,
+                required=True
+            )
+        ]
+    )
+    async def wizard_boom(self, inter:disnake.CommandInteraction, text:str):
+        await inter.response.defer(with_message=True)
+
+        FILE = await inter.bot.loop.run_in_executor(None, lambda: wizard_boom(text))
+        return await inter.edit_original_message(file=FILE)
+
+    @meme.sub_command(
+        name="wizard-think",
+        description="Abracawhat.",
+        options=[
+            disnake.Option(
+                name="text",
+                description="bottom text",
+                type=disnake.OptionType.string,
+                required=True
+            )
+        ]
+    )
+    async def wizard_think(self, inter:disnake.CommandInteraction, text:str):
+        await inter.response.defer(with_message=True)
+
+        FILE = await inter.bot.loop.run_in_executor(None, lambda: wizard_think(text))
+        return await inter.edit_original_message(file=FILE)
 
 def setup(bot):
     bot.add_cog(MemeMain(bot))
